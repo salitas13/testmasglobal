@@ -1,0 +1,37 @@
+<h1>Hello, world!</h1>
+<p>Welcome to your new single-page application, built with:</p>
+<form [formGroup]="queryEmployeesForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="employeeId">Employee ID:</label>
+    <input type="text" formControlName="employeeId" id="employeeId" autocomplete="off">
+  </div>
+  <br />
+  <div *ngIf="invalidData" class="error">
+    <div>{{errorMessage}}</div>
+  </div>
+  <button class="btn btn-primary" [disabled]="disabledButton">Get Employees</button>
+  <br />
+  <table class='table table-striped' *ngIf="employess">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Temp. (C)</th>
+        <th>Temp. (F)</th>
+        <th>Summary</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employess">
+        <td>{{ employee.Id }}</td>
+        <td>{{ employee.Name }}</td>
+        <td>{{ employee.ContractTypeName }}</td>
+        <td>{{ employee.RoleId }}</td>
+        <td>{{ employee.RoleName }}</td>
+        <td>{{ employee.RoleDescription }}</td>
+        <td>{{ employee.HourlySalary }}</td>
+        <td>{{ employee.MonthlySalary }}</td>
+        <td>{{ employee.AnnualSalary }}</td>
+      </tr>
+    </tbody>
+  </table>
+</form>
