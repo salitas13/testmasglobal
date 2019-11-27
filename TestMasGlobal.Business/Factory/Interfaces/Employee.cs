@@ -9,10 +9,11 @@ namespace TestMasGlobal.Business.Factory.Interfaces
         public string ContractTypeName { get; set; }
         public int RoleId { get; set; }
         public string RoleName { get; set; }
-        public object RoleDescription { get; set; }
-        public int HourlySalary { get; set; }
-        public int MonthlySalary { get; set; }
+        public string RoleDescription { get; set; }
+        public double HourlySalary { get; set; }
+        public double MonthlySalary { get; set; }
+        public double AnnualSalary { get; set; }
 
-        public abstract double CalculateSalary();
+        public abstract void CalculateSalary();
     }
 }

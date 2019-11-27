@@ -7,9 +7,9 @@ namespace TestMasGlobal.Business.Factory.Contract
         private const int HOURS = 120;
         private const int MONTHS = 12;
 
-        public override double CalculateSalary()
+        public override void CalculateSalary()
         {
-            return HOURS * this.HourlySalary * MONTHS;
+            this.AnnualSalary = HOURS * this.HourlySalary * MONTHS;
         }
     }
 }

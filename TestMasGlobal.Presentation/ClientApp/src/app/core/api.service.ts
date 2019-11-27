@@ -8,7 +8,7 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
   // Url test
-  baseUrl: string = 'http://localhost:51141/';
+  baseUrl: string = 'http://localhost:52017/';
 
   getEmployees(): Observable<ApiResponse> {
     return this.http.get<ApiResponse>(this.baseUrl + 'api/employee');

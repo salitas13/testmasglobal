@@ -1,27 +1,33 @@
-<h1>Hello, world!</h1>
-<p>Welcome to your new single-page application, built with:</p>
+<h1>Employees</h1>
 <form [formGroup]="queryEmployeesForm" (ngSubmit)="onSubmit()">
   <div>
-    <label for="employeeId">Employee ID:</label>
+    <label for="employeeId">Employee ID:&nbsp;</label>
     <input type="text" formControlName="employeeId" id="employeeId" autocomplete="off">
   </div>
   <br />
-  <div *ngIf="invalidData" class="error">
-    <div>{{errorMessage}}</div>
+  <div *ngIf="invalidData" class="alert alert-warning alert-dismissible fade show">
+    <strong>Warning!</strong> {{errorMessage}}
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
   </div>
   <button class="btn btn-primary" [disabled]="disabledButton">Get Employees</button>
   <br />
-  <table class='table table-striped' *ngIf="employess">
+  <br />
+  <table class='table table-striped' *ngIf="employees">
     <thead>
       <tr>
-        <th>Date</th>
-        <th>Temp. (C)</th>
-        <th>Temp. (F)</th>
-        <th>Summary</th>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Contract Type Name</th>
+        <th>Role Id</th>
+        <th>Role Name</th>
+        <th>Role Description</th>
+        <th>Hourly Salary</th>
+        <th>Monthly Salary</th>
+        <th>Annual Salary</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let employee of employess">
+      <tr *ngFor="let employee of employees">
         <td>{{ employee.Id }}</td>
         <td>{{ employee.Name }}</td>
         <td>{{ employee.ContractTypeName }}</td>

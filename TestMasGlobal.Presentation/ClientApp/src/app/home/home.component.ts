@@ -19,6 +19,7 @@ export class HomeComponent {
     let employeeid = this.queryEmployeesForm.controls.employeeId.value;
 
     this.disabledButton = true;
+    this.invalidData = false;
 
     if (this.queryEmployeesForm.controls.employeeId.value == "") {
       this.apiService.getEmployees().subscribe(data => {
@@ -29,6 +30,7 @@ export class HomeComponent {
           this.disabledButton = false;
 
         } else {
+          this.employees = [];
           this.invalidData = true;
           this.errorMessage = data.Message;
           this.disabledButton = false;
@@ -43,6 +45,7 @@ export class HomeComponent {
           this.employees = [data.Result];
 
         } else {
+          this.employees = [];
           this.invalidData = true;
           this.errorMessage = data.Message;
           this.disabledButton = false;

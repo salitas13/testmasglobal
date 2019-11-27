@@ -34,6 +34,9 @@
     <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmployeeBusiness.cs" />
     <Compile Include="Factory\EmployeeFactory.cs" />
     <Compile Include="Factory\Contract\HourlySalaryEmployee.cs" />
     <Compile Include="Factory\Contract\MonthlySalaryEmployee.cs" />
@@ -52,6 +56,10 @@
     <Compile Include="Services\EmployeeService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TestMasGlobal.DataAccess\TestMasGlobal.DataAccess.csproj">
+      <Project>{22f05197-cc30-4cc0-a170-1c4d87799ff6}</Project>
+      <Name>TestMasGlobal.DataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TestMasGlobal.Model\TestMasGlobal.Model.csproj">
       <Project>{5855CAE2-E507-4C24-A09C-C065B7004439}</Project>
       <Name>TestMasGlobal.Model</Name>

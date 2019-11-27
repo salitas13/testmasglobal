@@ -1,12 +1,10 @@
 ﻿using AutoMapper;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TestMasGlobal.Business.Factory;
 using TestMasGlobal.Business.Factory.Interfaces;
+using TestMasGlobal.DataAccess.Providers;
 using TestMasGlobal.Model;
+using TestMasGlobal.Model.Exceptions;
 
 namespace TestMasGlobal.Business.Services
 {
@@ -14,7 +12,14 @@ namespace TestMasGlobal.Business.Services
     {
         public Employee GetEmployee(int id)
         {
-            EmployeeDTO employeeDto = new EmployeeDTO();
+            EmployeeBusiness employeeRepository = new EmployeeBusiness(new ApiEmployeeRepository());
+            EmployeeDTO employeeDto = employeeRepository.GetEmployee(id);
+
+            if (employeeDto == null)
+            {
+                throw new ApiException("Employee not found.");
+            }
+
             EmployeeFactory contractFactory = new EmployeeFactory();
             Employee employee = contractFactory.CreateContract(employeeDto.ContractTypeName);
 
@@ -32,7 +37,8 @@ namespace TestMasGlobal.Business.Services
 
         public List<Employee> GetAllEmployees()
         {
-            List<EmployeeDTO> employeesdto = new List<EmployeeDTO>();
+            EmployeeBusiness employeeRepository = new EmployeeBusiness(new ApiEmployeeRepository());
+            List<EmployeeDTO> employeesdto = employeeRepository.GetEmployees();
             List<Employee> employees = new List<Employee>();
 
             EmployeeFactory contractFactory = new EmployeeFactory();
@@ -50,6 +56,7 @@ namespace TestMasGlobal.Business.Services
                 iMapper.Map<EmployeeDTO, Employee>(employeedto, employee);
 
                 employee.CalculateSalary();
+                employees.Add(employee);
             }
 
             return employees;
