@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Configuration;
 using TestMasGlobal.DataAccess.Interfaces;
 using TestMasGlobal.Model;
 
@@ -15,8 +16,6 @@ namespace TestMasGlobal.DataAccess.Providers
 {
     public class ApiEmployeeRepository : IEmployeeRepository
     {
-        private static string baseUrl = ConfigurationManager.AppSettings["WebApi"];
-
         private static string GetStringAsync(string url)
         {
             HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
@@ -31,7 +30,14 @@ namespace TestMasGlobal.DataAccess.Providers
 
         public List<EmployeeDTO> GetEmployees()
         {
-            var employeeJson = GetStringAsync(baseUrl);
+            var url = ConfigurationManager.AppSettings["WebApiUrl"];
+
+            if (url== null)
+            {
+                return null;
+            }
+
+            var employeeJson = GetStringAsync(url);
             // Here I use Newtonsoft.Json to deserialize JSON string to Employee object
             var employees = JsonConvert.DeserializeObject<List<EmployeeDTO>>(employeeJson);
             return employees;

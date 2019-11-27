@@ -38,7 +38,7 @@ namespace TestMasGlobal.Business.Services
         public List<Employee> GetAllEmployees()
         {
             EmployeeBusiness employeeRepository = new EmployeeBusiness(new ApiEmployeeRepository());
-            List<EmployeeDTO> employeesdto = employeeRepository.GetEmployees();
+            List<EmployeeDTO> employeesDto = employeeRepository.GetEmployees();
             List<Employee> employees = new List<Employee>();
 
             EmployeeFactory contractFactory = new EmployeeFactory();
@@ -49,14 +49,17 @@ namespace TestMasGlobal.Business.Services
 
             IMapper iMapper = config.CreateMapper();
 
-            foreach (var employeedto in employeesdto)
+            if (employeesDto != null)
             {
-                Employee employee = contractFactory.CreateContract(employeedto.ContractTypeName);
+                foreach (var employeeDto in employeesDto)
+                {
+                    Employee employee = contractFactory.CreateContract(employeeDto.ContractTypeName);
 
-                iMapper.Map<EmployeeDTO, Employee>(employeedto, employee);
+                    iMapper.Map<EmployeeDTO, Employee>(employeeDto, employee);
 
-                employee.CalculateSalary();
-                employees.Add(employee);
+                    employee.CalculateSalary();
+                    employees.Add(employee);
+                }
             }
 
             return employees;
