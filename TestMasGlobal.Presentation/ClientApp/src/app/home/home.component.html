@@ -2,14 +2,15 @@
 <form [formGroup]="queryEmployeesForm" (ngSubmit)="onSubmit()">
   <div>
     <label for="employeeId">Employee ID:&nbsp;</label>
-    <input type="text" formControlName="employeeId" id="employeeId" autocomplete="off">
+    <input type="text" (keypress)="numberOnly($event)" formControlName="employeeId" id="employeeId" autocomplete="off">
+    <div class="error" *ngIf="queryEmployeesForm.get('employeeId').hasError('maxlength')">Max of 9 characters</div>
   </div>
   <br />
   <div *ngIf="invalidData" class="alert alert-warning alert-dismissible fade show">
     <strong>Warning!</strong> {{errorMessage}}
     <button type="button" class="close" data-dismiss="alert">&times;</button>
   </div>
-  <button class="btn btn-primary" [disabled]="disabledButton">Get Employees</button>
+  <button class="btn btn-primary" [disabled]="queryEmployeesForm.invalid || disabledButton">Get Employees</button>
   <br />
   <br />
   <table class='table table-striped' *ngIf="employees">

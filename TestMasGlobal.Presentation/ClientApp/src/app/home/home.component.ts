@@ -50,6 +50,9 @@ export class HomeComponent {
           this.errorMessage = data.Message;
           this.disabledButton = false;
         }
+      }, error => {
+          this.disabledButton = false;
+
       });
     }
   }
@@ -57,8 +60,17 @@ export class HomeComponent {
   ngOnInit() {
 
     this.queryEmployeesForm = this.formBuilder.group({
-      employeeId: ['', Validators.required]
+      employeeId: ['', Validators.maxLength(9)]
     });
+
+  }
+
+  numberOnly(event): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
 
   }
 }

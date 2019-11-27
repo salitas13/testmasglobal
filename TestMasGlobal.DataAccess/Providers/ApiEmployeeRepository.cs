@@ -16,7 +16,7 @@ namespace TestMasGlobal.DataAccess.Providers
 {
     public class ApiEmployeeRepository : IEmployeeRepository
     {
-        private static string baseUrl = ConfigurationManager.AppSettings["WebApi"];
+        private static string baseUrl = ConfigurationManager.AppSettings["WebApiUrl"];
 
         private static string GetStringAsync(string url)
         {
